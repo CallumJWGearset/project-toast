@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
-function TextArea({ id, ...rest }) {
-  const [value, setValue] = useState("");
-
+function TextArea({ id, value, onChange, ...rest }) {
   return (
     <textarea
       id={id}
       value={value}
-      onChange={(e) => setValue(e.target.value)}
+      onChange={(e) => onChange(e.target.value)}
       {...rest}
     />
   );
