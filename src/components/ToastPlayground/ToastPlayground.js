@@ -5,12 +5,14 @@ import Button from "../Button";
 import styles from "./ToastPlayground.module.css";
 import RadioButtonGroup, { RadioButton } from "../RadioButtonGroup";
 import TextArea from "../TextArea";
+import Toast from "../Toast";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
   const [message, setMessage] = useState("");
   const [variant, setVariant] = useState(() => VARIANT_OPTIONS[0]);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className={styles.wrapper}>
@@ -18,6 +20,10 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
+
+      <Toast variant={variant} isOpen={isOpen} close={() => setIsOpen(false)}>
+        {message}
+      </Toast>
 
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>
@@ -54,7 +60,7 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button>Pop Toast!</Button>
+            <Button onClick={() => setIsOpen(true)}>Pop Toast!</Button>
           </div>
         </div>
       </div>
