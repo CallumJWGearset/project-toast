@@ -1,30 +1,18 @@
-import React, {
-  createContext,
-  forwardRef,
-  use,
-  useId,
-  useMemo,
-  useState,
-} from "react";
+import React, { createContext, forwardRef, use, useId, useMemo } from "react";
 
 const RadioButtonContext = createContext(null);
 
-const RadioButtonContextProvider = ({ children, defaultValue }) => {
-  const [selectedOption, setSelectedOption] = useState(defaultValue);
-
-  const value = useMemo(
-    () => ({ selectedOption, setSelectedOption }),
-    [selectedOption]
+function RadioButtonGroup({ children, value, onChange }) {
+  const contextValue = useMemo(
+    () => ({
+      selectedOption: value,
+      setSelectedOption: onChange,
+    }),
+    [onChange, value]
   );
 
-  return <RadioButtonContext value={value}>{children}</RadioButtonContext>;
-};
-
-function RadioButtonGroup({ children, defaultValue }) {
   return (
-    <RadioButtonContextProvider defaultValue={defaultValue}>
-      {children}
-    </RadioButtonContextProvider>
+    <RadioButtonContext value={contextValue}>{children}</RadioButtonContext>
   );
 }
 

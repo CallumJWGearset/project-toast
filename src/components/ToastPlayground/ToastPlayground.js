@@ -10,6 +10,7 @@ const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
   const [message, setMessage] = useState("");
+  const [variant, setVariant] = useState(() => VARIANT_OPTIONS[0]);
 
   return (
     <div className={styles.wrapper}>
@@ -40,7 +41,7 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label}>Variant</div>
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <RadioButtonGroup defaultValue={VARIANT_OPTIONS[0]}>
+            <RadioButtonGroup value={variant} onChange={setVariant}>
               {VARIANT_OPTIONS.map((option) => (
                 <RadioButton value={option} key={option}>
                   {option}
