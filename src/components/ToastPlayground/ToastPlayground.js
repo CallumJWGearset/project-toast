@@ -4,6 +4,7 @@ import Button from "../Button";
 
 import styles from "./ToastPlayground.module.css";
 import RadioButtonGroup, { RadioButton } from "../RadioButtonGroup";
+import TextArea from "../TextArea";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
@@ -25,7 +26,7 @@ function ToastPlayground() {
             Message
           </label>
           <div className={styles.inputWrapper}>
-            <textarea id="message" className={styles.messageInput} />
+            <TextArea id="message" className={styles.messageInput} />
           </div>
         </div>
 
