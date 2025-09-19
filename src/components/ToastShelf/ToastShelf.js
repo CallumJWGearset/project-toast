@@ -2,6 +2,7 @@ import React from "react";
 
 import Toast from "../Toast";
 import styles from "./ToastShelf.module.css";
+import { useToast } from "../ToastProvider";
 
 /*
  * A toast is:
@@ -12,7 +13,9 @@ import styles from "./ToastShelf.module.css";
  * }
  * */
 
-function ToastShelf({ toasts, removeToast }) {
+function ToastShelf() {
+  const { toasts, removeToast } = useToast();
+
   return (
     <ol className={styles.wrapper}>
       {toasts.map(({ id, message, variant }) => (
