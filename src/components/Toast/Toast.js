@@ -11,6 +11,8 @@ import VisuallyHidden from "../VisuallyHidden";
 
 import styles from "./Toast.module.css";
 
+export const VARIANTS = ["notice", "warning", "success", "error"];
+
 const ICONS_BY_VARIANT = {
   notice: Info,
   warning: AlertTriangle,
