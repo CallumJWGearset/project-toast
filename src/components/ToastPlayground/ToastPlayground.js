@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import Button from "../Button";
 
@@ -6,10 +6,21 @@ import styles from "./ToastPlayground.module.css";
 import RadioButtonGroup, { RadioButton } from "../RadioButtonGroup";
 import TextArea from "../TextArea";
 import { VARIANTS } from "../Toast";
+import ToastShelf from "../ToastShelf";
+import { useToasts } from "../../lib/useToasts";
 
 function ToastPlayground() {
   const [message, setMessage] = useState("");
   const [variant, setVariant] = useState(() => VARIANTS[0]);
+  const { toasts, pushToast, removeToast } = useToasts();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    pushToast(message, variant);
+    setMessage("");
+    setVariant(VARIANTS[0]);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -18,7 +29,9 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <div className={styles.controlsWrapper}>
+      <ToastShelf toasts={toasts} removeToast={removeToast} />
+
+      <form className={styles.controlsWrapper} onSubmit={handleSubmit}>
         <div className={styles.row}>
           <label
             htmlFor="message"
@@ -56,7 +69,7 @@ function ToastPlayground() {
             <Button onClick={() => {}}>Pop Toast!</Button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
