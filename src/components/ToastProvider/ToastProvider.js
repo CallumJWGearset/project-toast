@@ -2,6 +2,7 @@ import React, {
   createContext,
   use,
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -39,6 +40,18 @@ function ToastProvider({ children }) {
     () => ({ toasts, pushToast, removeToast }),
     [pushToast, removeToast, toasts]
   );
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setToasts(() => []);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  });
 
   return <ToastContext value={value}>{children}</ToastContext>;
 }
