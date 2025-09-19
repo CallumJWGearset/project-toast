@@ -39,7 +39,6 @@ function Toast({ variant, children, close }) {
         aria-live="off"
       >
         <X size={24} />
-        <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
     </div>
   );
